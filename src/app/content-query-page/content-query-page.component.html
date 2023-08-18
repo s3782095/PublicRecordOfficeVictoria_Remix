@@ -52,9 +52,10 @@
       <div *ngIf="results.length > 0">
         <div *ngFor="let result of results">
           <p>{{result['iiif-manifest']}}</p>
-          <img [src]="getImageURLFromManifest(results['iiif-manifest'])" alt="Image">
+          <img [src]="getImageURLFromManifest(result['iiif-manifest'])" alt="Image">
         </div>
       </div>
+
       <img *ngIf="results['iiif-manifest']" [src]="getImageURLFromManifest(results['iiif-manifest'])" alt="Image">
 
 <!--      <div *ngFor="let doc of results['response']['docs']">-->

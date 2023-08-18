@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
+import {delay} from "rxjs";
 
 @Component({
   selector: 'app-content-query-page',
@@ -13,6 +14,7 @@ export class ContentQueryPageComponent {
   results: any = [];
   API_BASE_URL: string = 'https://api.prov.vic.gov.au/search/';
   query_url: string = '';
+  imageCache: { [key: string]: string } = {};
 
   RECORD_TYPES: string[] = ["File", "Document", "Map, Plan, Or Drawing", "Photograph or Image", "Volume", "Card",];
   chosen_record_types: string[] = ["Photograph or Image"];
@@ -31,11 +33,10 @@ export class ContentQueryPageComponent {
 
   SearchQuery() {
     const queryUrl = this.constructQueryUrl();
-    // console.log(queryUrl)
 
     this.http.get<any>(queryUrl).subscribe({
       next: (data) => {
-        this.results = data['response']['docs'];
+        this.results = data['response']['docs'][0];
         console.log(this.results);
       },
       error: (error) => {
@@ -53,18 +54,26 @@ export class ContentQueryPageComponent {
   }
 
   getImageURLFromManifest(url_to_manifest: string): string {
-    this.http.get<any>(url_to_manifest).subscribe({
-        next: (manifest) => {
-          console.log(manifest)
-          return manifest['sequences']['rendering'];
-        },
-        error: (error) => {
-          console.error('Error fetching manifest JSON:', error);
-        },
-        complete: () => {
+    if (this.imageCache[url_to_manifest]) {
+      return this.imageCache[url_to_manifest]
+    } else {
+      this.http.get<any>(url_to_manifest).subscribe({
+          next: (manifest) => {
+            this.imageCache[url_to_manifest] = manifest['sequences'][0]['rendering']['@id'];
+            console.log(manifest['sequences'][0]['rendering']['@id']);
+            let file = manifest['sequences'][0]['rendering']['@id'];
+            return file;
+          },
+          error: (error) => {
+            this.imageCache[url_to_manifest] = '';
+            console.error('Error fetching manifest JSON:', error);
+          },
+          complete: () => {
+          }
         }
-      }
-    );
+      );
+    }
+
     return '';
   }
 }
