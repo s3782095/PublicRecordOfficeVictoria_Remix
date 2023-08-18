@@ -33,15 +33,15 @@ export class ContentQueryPageComponent {
     const queryUrl = this.constructQueryUrl();
     // console.log(queryUrl)
 
-    this.http.get<any>(queryUrl).subscribe(
-      (data) => {
+    this.http.get<any>(queryUrl).subscribe({
+      next: (data) => {
         this.results = data['response']['docs'];
         console.log(this.results);
       },
-      (error) => {
-        // console.error(error);
+      error: (error) => {
+        console.log(error);
       }
-    );
+    });
   }
 
   toggleTypeSelection(record_type: string) {
@@ -53,16 +53,18 @@ export class ContentQueryPageComponent {
   }
 
   getImageURLFromManifest(url_to_manifest: string): string {
-    this.http.get<any>(url_to_manifest).subscribe(
-      (manifest) => {
+    this.http.get<any>(url_to_manifest).subscribe({
+        next: (manifest) => {
           console.log(manifest)
           return manifest['sequences']['rendering'];
-      },
-      (error) => {
-        console.error('Error fetching manifest JSON:', error);
+        },
+        error: (error) => {
+          console.error('Error fetching manifest JSON:', error);
+        },
+        complete: () => {
+        }
       }
     );
-
     return '';
   }
 }

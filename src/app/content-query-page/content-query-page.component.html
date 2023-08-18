@@ -44,8 +44,16 @@
     <p>{{this.type_of_record}}</p>
 
     <div *ngIf="results">
+      <p>Results</p>
+      <p>{{results.length}}</p>
       <div *ngIf="results.length == 0">
         <h3 class="text-center text-secondary">No Results</h3>
+      </div>
+      <div *ngIf="results.length > 0">
+        <div *ngFor="let result of results">
+          <p>{{result['iiif-manifest']}}</p>
+          <img [src]="getImageURLFromManifest(results['iiif-manifest'])" alt="Image">
+        </div>
       </div>
       <img *ngIf="results['iiif-manifest']" [src]="getImageURLFromManifest(results['iiif-manifest'])" alt="Image">
 
