@@ -32,12 +32,19 @@ export class ContentQueryPageComponent {
   }
 
   SearchQuery() {
+    if (!this.chosen_record_types.includes(this.type_of_record) && this.chosen_record_types.length == 0) {
+      this.toggleTypeSelection('Photograph or Image') // Default
+    }
     const queryUrl = this.constructQueryUrl();
 
     this.http.get<any>(queryUrl).subscribe({
       next: (data) => {
         this.results = data['response']['docs'][0];
         console.log(this.results);
+
+        if (this.results == undefined) {
+          this.toggleTypeSelection(this.type_of_record);
+        }
       },
       error: (error) => {
         console.log(error);
@@ -59,9 +66,9 @@ export class ContentQueryPageComponent {
     } else {
       this.http.get<any>(url_to_manifest).subscribe({
           next: (manifest) => {
-            this.imageCache[url_to_manifest] = manifest['sequences'][0]['rendering']['@id'];
-            console.log(manifest['sequences'][0]['rendering']['@id']);
-            let file = manifest['sequences'][0]['rendering']['@id'];
+            this.imageCache[url_to_manifest] = manifest['thumbnail'];
+            console.log(manifest['thumbnail']);
+            let file = manifest['thumbnail'];
             return file;
           },
           error: (error) => {

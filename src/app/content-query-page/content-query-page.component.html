@@ -20,35 +20,14 @@
         <span class="input-group-text" (click)="SearchQuery()">Search</span>
       </div>
     </div>
-    <!--    <h3 class="text-center text-secondary">{{ query }}</h3>-->
-    <!--    <div *ngIf="results.length != 0">-->
-    <!--      <div *ngFor="let doc of results['response']['docs']">-->
-    <!--        <img *ngIf="doc['iiif-thumbnail']" [src]="doc['iiif-thumbnail']" alt="Image">-->
-    <!--      </div>-->
-    <!--&lt;!&ndash;      <pre>{{ results | json }}</pre>&ndash;&gt;-->
-    <!--    </div>-->
 
-    <!--    <div *ngIf="results && results['response']['docs'].length == 0">-->
-    <!--      <h3 class="text-center text-secondary">No Results</h3>-->
-    <!--    </div>-->
-
-
-    <div *ngIf="chosen_record_types">
-      <div *ngFor="let record_type of chosen_record_types">
-        <p>{{record_type}}</p>
-
-      </div>
-    </div>
-
-    <p>{{query_url}}</p>
-    <p>{{this.type_of_record}}</p>
+<!--    <div *ngIf="chosen_record_types">-->
+<!--      <div *ngFor="let record_type of chosen_record_types">-->
+<!--        <p>{{record_type}}</p>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <div *ngIf="results">
-      <p>Results</p>
-      <p>{{results.length}}</p>
-      <div *ngIf="results.length == 0">
-        <h3 class="text-center text-secondary">No Results</h3>
-      </div>
       <div *ngIf="results.length > 0">
         <div *ngFor="let result of results">
           <p>{{result['iiif-manifest']}}</p>
@@ -58,11 +37,13 @@
 
       <img *ngIf="results['iiif-manifest']" [src]="getImageURLFromManifest(results['iiif-manifest'])" alt="Image">
 
-<!--      <div *ngFor="let doc of results['response']['docs']">-->
-<!--        <p> {{getImageURLFromManifest(doc['iiif-manifest'])}}</p>-->
-<!--      </div>-->
-
     </div>
+
+    <div *ngIf="!results">
+      <h3 class="text-center text-secondary">No Results for {{type_of_record}}</h3>
+    </div>
+
+
 
   </form>
 </div>
