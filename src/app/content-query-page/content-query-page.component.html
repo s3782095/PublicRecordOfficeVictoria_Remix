@@ -41,14 +41,17 @@
     </div>
 
     <p>{{query_url}}</p>
+    <p>{{this.type_of_record}}</p>
 
     <div *ngIf="results">
-      <div *ngIf="results['response']['docs'].length == 0">
+      <div *ngIf="results.length == 0">
         <h3 class="text-center text-secondary">No Results</h3>
       </div>
-      <div *ngFor="let doc of results['response']['docs']">
-        <img *ngIf="doc['iiif-thumbnail']" [src]="doc['iiif-thumbnail']" alt="Image">
-      </div>
+      <img *ngIf="results['iiif-manifest']" [src]="getImageURLFromManifest(results['iiif-manifest'])" alt="Image">
+
+<!--      <div *ngFor="let doc of results['response']['docs']">-->
+<!--        <p> {{getImageURLFromManifest(doc['iiif-manifest'])}}</p>-->
+<!--      </div>-->
 
     </div>
 

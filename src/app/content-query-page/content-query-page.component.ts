@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 
@@ -10,14 +10,15 @@ import {parseJson} from "@angular/cli/src/utilities/json-file";
 export class ContentQueryPageComponent {
   search_request: string = '';
   type_of_record: string = '';
-  results: any = null;
+  results: any = [];
   API_BASE_URL: string = 'https://api.prov.vic.gov.au/search/';
   query_url: string = '';
 
   RECORD_TYPES: string[] = ["File", "Document", "Map, Plan, Or Drawing", "Photograph or Image", "Volume", "Card",];
   chosen_record_types: string[] = ["Photograph or Image"];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   constructQueryUrl(): string {
     const queryParams = `query?wt=json&q=(text%3A%22${encodeURIComponent(this.search_request)}%22)%20AND%20((record_form%3A%22${encodeURIComponent(this.selectOneRandomRecordTypes())}%22))%20AND%20(iiif-manifest%3A(*))`;
@@ -25,21 +26,20 @@ export class ContentQueryPageComponent {
   }
 
   selectOneRandomRecordTypes(): string {
-    return this.chosen_record_types[Math.floor(Math.random() * this.chosen_record_types.length)];
+    return this.type_of_record = this.chosen_record_types[Math.floor(Math.random() * this.chosen_record_types.length)];
   }
 
   SearchQuery() {
-    console.log(this.search_request)
-
     const queryUrl = this.constructQueryUrl();
+    // console.log(queryUrl)
 
     this.http.get<any>(queryUrl).subscribe(
       (data) => {
-        this.results = data;
-        console.log(data); // Display the response data in the console
+        this.results = data['response']['docs'];
+        console.log(this.results);
       },
       (error) => {
-        console.error(error); // Display any errors in the console
+        // console.error(error);
       }
     );
   }
@@ -50,5 +50,19 @@ export class ContentQueryPageComponent {
     } else {
       this.chosen_record_types.push(record_type);
     }
+  }
+
+  getImageURLFromManifest(url_to_manifest: string): string {
+    this.http.get<any>(url_to_manifest).subscribe(
+      (manifest) => {
+          console.log(manifest)
+          return manifest['sequences']['rendering'];
+      },
+      (error) => {
+        console.error('Error fetching manifest JSON:', error);
+      }
+    );
+
+    return '';
   }
 }
