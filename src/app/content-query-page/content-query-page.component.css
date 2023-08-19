@@ -40,7 +40,7 @@ h1, h2, h3, h4 {
 
 img {
   max-height: 25vh;
-  /*min-height: 25vh;*/
+  min-height: 25vh;
 }
 
 .container-one {
@@ -81,6 +81,7 @@ img {
 .parameter-values {
   margin-top: 2em;
   max-height: 38vh;
+  min-height: 38vh;
   overflow-y: scroll;
 }
 
