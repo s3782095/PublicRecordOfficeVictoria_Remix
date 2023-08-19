@@ -31,8 +31,11 @@
     </div>
   </div>
 
-  <button class="btn btn-secondary" (click)="ChangeResult('prev')">prev</button>
-  <button class="btn btn-secondary" (click)="ChangeResult('next')">next</button>
+  <p>{{current_index}}</p>
+  <p>{{results_max_index}}</p>
+
+  <button *ngIf="current_index > 0 && results_max_index > 1" class="btn btn-secondary" (click)="ChangeResult('prev')">prev</button>
+  <button  *ngIf="current_index < results_max_index && results_max_index > 1" class="btn btn-secondary" (click)="ChangeResult('next')">next</button>
 
     <div *ngIf="results">
 

@@ -13,7 +13,9 @@ export class ContentQueryPageComponent {
   type_of_record: string = '';
 
   results: any = [];
+  results_max_index: number = 0;
   current_result: any;
+  current_index: number = 0;
 
   API_BASE_URL: string = 'https://api.prov.vic.gov.au/search/';
   imageCache: { [key: string]: string } = {};
@@ -43,7 +45,9 @@ export class ContentQueryPageComponent {
         (data: any) => {
           if (data['response']['docs'][0] != undefined) {
             this.results = data['response']['docs'];
+            this.results_max_index = this.results.length - 1;
             this.current_result = this.results[0];
+            this.current_index = 0;
             console.log(this.results);
           } else {
               this.results = undefined;
@@ -87,23 +91,20 @@ export class ContentQueryPageComponent {
   }
 
   ChangeResult(change: string) {
-    const indexOfCurrent = this.results.indexOf(this.current_result);
-    const maxIndex = this.results.length - 1;
+    console.log(this.results_max_index);
 
-    console.log(indexOfCurrent);
-    console.log(maxIndex);
-
-    let newIndex: number = -1;
+    let newIndex: number = -1; // Error
 
     if (change == 'next') {
-      newIndex = (indexOfCurrent + 1) % (maxIndex + 1);
+      newIndex = (this.current_index + 1) % (this.results_max_index + 1);
     } else if (change == 'prev') {
-      newIndex = (indexOfCurrent - 1 + maxIndex + 1) % (maxIndex + 1);
+      newIndex = (this.current_index - 1 + this.results_max_index + 1) % (this.results_max_index + 1);
     }
 
     console.log(newIndex);
     console.log(this.results[newIndex]);
 
+    this.current_index = newIndex
     this.current_result = this.results[newIndex];
 
   }
