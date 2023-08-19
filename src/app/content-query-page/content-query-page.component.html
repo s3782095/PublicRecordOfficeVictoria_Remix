@@ -31,8 +31,8 @@
 
         <div class="image-container">
           <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']"
-               (click)="downloadPDFFromManifest(current_result)" alt="Result Thumbnail" class="centered-image">
-          <div class="image-overlay"></div>
+                alt="Result Thumbnail" class="centered-image">
+          <div class="image-overlay" (click)="downloadPDFFromManifest(current_result)"></div>
         </div>
 
       </div>
