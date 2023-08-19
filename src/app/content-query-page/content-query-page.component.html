@@ -37,7 +37,10 @@
 <!--      </div>-->
 
 
+    <div *ngIf="results">
       <img *ngIf="results['iiif-thumbnail']" [src]="results['iiif-thumbnail']" (click)="downloadPDFFromManifest(results)" alt="Image">
+
+    </div>
 
 <!--      <img *ngIf="results['iiif-manifest']" [src]="getImageURLFromManifest(results)" alt="Image">-->
 

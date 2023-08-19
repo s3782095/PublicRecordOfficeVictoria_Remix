@@ -39,8 +39,12 @@ export class ContentQueryPageComponent {
 
     this.http.get<any>(queryUrl).subscribe({
       next: (data) => {
-        this.results = data['response']['docs'][0];
-        console.log(this.results);
+        if (data['response']['docs'][0] != undefined) {
+          this.results = data['response']['docs'][0];
+        } else {
+          this.results = [];
+        }
+
 
         if (this.results == undefined) {
           this.toggleTypeSelection(this.type_of_record);
@@ -60,38 +64,28 @@ export class ContentQueryPageComponent {
     }
   }
 
-  getImageURLFromManifest(url_to_manifest: string): string {
-    if (this.imageCache[url_to_manifest]) {
-      return this.imageCache[url_to_manifest]
-    } else {
-      this.http.get<any>(url_to_manifest).subscribe({
-          next: (manifest) => {
-            let imageURL: string = manifest['sequences'][0]['rendering']['@id']
-            this.imageCache[url_to_manifest] = imageURL;
-            console.log(imageURL);
-            return imageURL;
-          },
-          error: (error) => {
-            this.imageCache[url_to_manifest] = '';
-            console.error('Error fetching manifest JSON:', error);
-            return 'squid'
-          },
-          complete: () => {
-            return 'complete'
-          }
+  getImageURLFromManifest(url_to_manifest: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(url_to_manifest).subscribe(
+        (manifest: any) => {
+          let imageURL: any = manifest['sequences'][0]['rendering']['@id']
+          console.log(imageURL);
+          resolve(imageURL);
+        },
+        (error) => {
+          reject(error);
         }
       );
-    }
-
-    return '';
+    });
   }
 
-  downloadPDFFromManifest(pdfURLDownloadLink: any) {
-
-    const imageURL = this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
-
-    console.log(imageURL);
-
-    window.open(imageURL);
+  async downloadPDFFromManifest(pdfURLDownloadLink: any) {
+    try {
+      const imageURL = await this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
+      console.log(imageURL); // Use the data returned from the HTTP request
+      window.open(imageURL);
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   }
 }
