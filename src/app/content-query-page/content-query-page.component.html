@@ -22,24 +22,16 @@
     </div>
   </form>
 
-  <!--    <div *ngIf="chosen_record_types">-->
-<!--      <div *ngFor="let record_type of chosen_record_types">-->
-<!--        <p>{{record_type}}</p>-->
-<!--      </div>-->
-<!--    </div>-->
 
-<!--    <div *ngIf="results">-->
-<!--      <div *ngIf="results.length > 0">-->
-<!--        <div *ngFor="let result of results">-->
-<!--          <p>{{result['iiif-manifest']}}</p>-->
-<!--&lt;!&ndash;          <img [src]="getImageURLFromManifest(result['iiif-manifest'])" alt="Image">&ndash;&gt;-->
-<!--          <img *ngIf="results['iiif-thumbnail']" [src]="results['iiif-thumbnail']" (click)="downloadPDFFromManifest(result)" alt="Image">-->
-<!--        </div>-->
-<!--      </div>-->
-
+  <div *ngIf="results" class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <img *ngIf="results['iiif-thumbnail']" [src]="results['iiif-thumbnail']" (click)="downloadPDFFromManifest(results)" alt="Result Thumbnail" class="centered-image">
+      </div>
+    </div>
+  </div>
 
     <div *ngIf="results">
-      <img *ngIf="results['iiif-thumbnail']" [src]="results['iiif-thumbnail']" (click)="downloadPDFFromManifest(results)" alt="Image">
 
     </div>
 
