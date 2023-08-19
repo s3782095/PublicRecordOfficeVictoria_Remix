@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {parseJson} from "@angular/cli/src/utilities/json-file";
-import {delay} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-content-query-page',
@@ -9,8 +7,12 @@ import {delay} from "rxjs";
   styleUrls: ['./content-query-page.component.css']
 })
 export class ContentQueryPageComponent {
+  // File - Requires download from prov website
+  UNUSED_RECORD_TYPES: string[] = ["File"];
+  RECORD_TYPES: string[] = ["Document", "Map, Plan, or Drawing", "Photograph or Image", "Volume", "Card"];
+
   search_request: string = '';
-  type_of_record: string = '';
+  selected_record_type: string = this.RECORD_TYPES[2];
   search_executed: boolean = false;
 
   results: any = [];
@@ -19,23 +21,13 @@ export class ContentQueryPageComponent {
   current_index: number = 0;
 
   API_BASE_URL: string = 'https://api.prov.vic.gov.au/search/';
-  imageCache: { [key: string]: string } = {};
-
-  // File - Requires download from prov website
-  UNUSED_RECORD_TYPES: string[] = ["File"];
-  RECORD_TYPES: string[] = ["Document", "Map, Plan, or Drawing", "Photograph or Image", "Volume", "Card"];
-  chosen_record_types: string[] = ["Photograph or Image"];
 
   constructor(private http: HttpClient) {
   }
 
   constructQueryUrl(): string {
-    const queryParams = `query?wt=json&q=(text%3A%22${encodeURIComponent(this.search_request)}%22)%20AND%20((record_form%3A%22${encodeURIComponent(this.selectOneRandomRecordTypes())}%22))%20AND%20(iiif-manifest%3A(*))`;
+    const queryParams = `query?wt=json&q=(text%3A%22${encodeURIComponent(this.search_request)}%22)%20AND%20((record_form%3A%22${encodeURIComponent(this.selected_record_type)}%22))%20AND%20(iiif-manifest%3A(*))`;
     return this.API_BASE_URL + queryParams;
-  }
-
-  selectOneRandomRecordTypes(): string {
-    return this.type_of_record = this.chosen_record_types[Math.floor(Math.random() * this.chosen_record_types.length)];
   }
 
   clearResults() {
@@ -73,8 +65,7 @@ export class ContentQueryPageComponent {
   }
 
   toggleTypeSelection(record_type: string) {
-    this.chosen_record_types = [];
-    this.chosen_record_types.push(record_type);
+    this.selected_record_type = record_type;
   }
 
   getPDFUrl(url_to_manifest: string): Promise<any> {

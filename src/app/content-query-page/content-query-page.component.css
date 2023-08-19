@@ -3,14 +3,34 @@ body {
   margin: 0;
 }
 
-form{
+form {
   margin: 1em auto;
 }
 
 .btn-group {
   margin: 1em auto;
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
+  width: 100%;
+}
+
+.btn-group button {
+  border: none;
+  box-shadow: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-transform: uppercase;
+  line-height: 1;
+  font-family: serif;
+  font-style: italic;
+}
+
+.btn-group button:hover {
+  color: blue;
+}
+
+.btn-group button:active {
+  background-color: rgba(0, 0, 255, 0.3);
 }
 
 h1, h2, h3, h4, h5 {
@@ -69,6 +89,7 @@ img {
   background-color: rgba(0, 0, 255, 0.3);
   opacity: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .image-container:hover .image-overlay {
@@ -112,7 +133,16 @@ img {
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-family: Soehne, serif;
   width: 100%;
+}
+
+button {
+  margin: 0.1em;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
 }
