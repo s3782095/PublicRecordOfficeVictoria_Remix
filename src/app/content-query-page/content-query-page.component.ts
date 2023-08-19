@@ -66,15 +66,18 @@ export class ContentQueryPageComponent {
     } else {
       this.http.get<any>(url_to_manifest).subscribe({
           next: (manifest) => {
-            this.imageCache[url_to_manifest] = manifest['iiif-manifest'];
-            console.log(manifest['iiif-manifest']);
-            return manifest['iiif-manifest'];
+            let imageURL: string = manifest['sequences'][0]['rendering']['@id']
+            this.imageCache[url_to_manifest] = imageURL;
+            console.log(imageURL);
+            return imageURL;
           },
           error: (error) => {
             this.imageCache[url_to_manifest] = '';
             console.error('Error fetching manifest JSON:', error);
+            return 'squid'
           },
           complete: () => {
+            return 'complete'
           }
         }
       );
@@ -84,10 +87,13 @@ export class ContentQueryPageComponent {
   }
 
   downloadPDFFromManifest(pdfURLDownloadLink: any) {
-    console.log(pdfURLDownloadLink);
+
     const anchor = document.createElement('a');
-    const manifest: any = this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
-    anchor.href = manifest['sequences'][0]['rendering']['@id'];
+    const manifest = this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
+
+    console.log(this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']));
+    anchor.href = manifest;
+
     anchor.download = pdfURLDownloadLink['_id'] + ".pdf"; // filename
     console.log(anchor);
     document.body.appendChild(anchor);
