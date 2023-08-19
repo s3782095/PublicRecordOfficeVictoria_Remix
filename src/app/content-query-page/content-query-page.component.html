@@ -17,11 +17,12 @@
       <h1 class="text-center text-primary">Image Search</h1>
       <div class="input-group-prepend">
         <input type="text" [(ngModel)]="search_request" class="form-control" placeholder="Query" name="query">
-        <span class="input-group-text" (click)="SearchQuery()">Search</span>
+        <button class="input-group-text" type="submit" (click)="SearchQuery()">Search</button>
       </div>
     </div>
+  </form>
 
-<!--    <div *ngIf="chosen_record_types">-->
+  <!--    <div *ngIf="chosen_record_types">-->
 <!--      <div *ngFor="let record_type of chosen_record_types">-->
 <!--        <p>{{record_type}}</p>-->
 <!--      </div>-->
@@ -52,5 +53,4 @@
 
 
 
-  </form>
 </div>
