@@ -37,7 +37,16 @@ export class ContentQueryPageComponent {
     return this.type_of_record = this.chosen_record_types[Math.floor(Math.random() * this.chosen_record_types.length)];
   }
 
+  clearResults() {
+    this.results = [];
+    this.results_max_index = 0;
+    this.current_index = -1;
+    this.current_result = undefined;
+  }
+
   SearchQuery(): Promise<any> {
+    this.clearResults();
+
     let queryUrl = this.constructQueryUrl();
 
     return new Promise((resolve, reject) => {
