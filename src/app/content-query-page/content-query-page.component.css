@@ -13,7 +13,7 @@ form{
   justify-content: center;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5 {
   margin: 0;
   text-transform: uppercase;
   line-height: 1.1;
@@ -22,13 +22,18 @@ h1, h2, h3, h4 {
   font-style: italic;
 }
 
-.parameter-values h3 {
+.parameter-values h4 {
   font-style: normal;
+  font-weight: lighter;
   color: gray;
   transition: color 0.2s ease;
 }
 
-.parameter-values h3:hover {
+.parameter-values :nth-child(2n) {
+  color: lightgray;
+}
+
+.parameter-values h4:hover {
   color: blue;
   cursor: pointer;
 }
