@@ -30,7 +30,11 @@
         <div class="image-container">
           <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']"
                alt="Result Thumbnail" class="centered-image">
-          <div class="image-overlay" (click)="downloadPDFFromManifest(current_result)"></div>
+          <div class="image-overlay" (click)="downloadPDFFromManifest(current_result)">
+            <a class="icon" title="Expand Image">
+              <i class="fa fa-expand"></i>
+            </a>
+          </div>
         </div>
 
       </div>
