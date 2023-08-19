@@ -65,7 +65,10 @@ export class ContentQueryPageComponent {
   }
 
   toggleTypeSelection(record_type: string) {
-    this.selected_record_type = record_type;
+    if (record_type != this.selected_record_type) {
+      this.clearResults();
+      this.selected_record_type = record_type;
+    }
   }
 
   getPDFUrl(url_to_manifest: string): Promise<any> {
