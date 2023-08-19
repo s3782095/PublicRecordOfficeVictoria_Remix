@@ -75,10 +75,11 @@ export class ContentQueryPageComponent {
     this.chosen_record_types.push(record_type);
   }
 
-  getImageURLFromManifest(url_to_manifest: string): Promise<any> {
+  getPDFUrl(url_to_manifest: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(url_to_manifest).subscribe(
         (manifest: any) => {
+          console.log(manifest['sequences'][0]);
           let imageURL: any = manifest['sequences'][0]['rendering']['@id']
           resolve(imageURL);
         },
@@ -91,7 +92,7 @@ export class ContentQueryPageComponent {
 
   async downloadPDFFromManifest(pdfURLDownloadLink: any) {
     try {
-      const imageURL = await this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
+      const imageURL = await this.getPDFUrl(pdfURLDownloadLink['iiif-manifest']);
       console.log(imageURL); // Use the data returned from the HTTP request
       window.open(imageURL);
     } catch (error) {

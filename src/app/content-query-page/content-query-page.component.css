@@ -14,3 +14,27 @@ form{
   display: flex;
   justify-content: center;
 }
+
+h1, h2, h3, h4 {
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 1.1;
+  font-family: serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.search-container {
+}
+
+.search-field {
+  appearance: none;
+  outline: none;
+
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  font-family: Soehne, serif;
+  width: 100%;
+}
