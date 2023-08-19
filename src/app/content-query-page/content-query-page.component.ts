@@ -32,9 +32,6 @@ export class ContentQueryPageComponent {
   }
 
   SearchQuery() {
-    if (!this.chosen_record_types.includes(this.type_of_record) && this.chosen_record_types.length == 0) {
-      this.toggleTypeSelection('Photograph or Image') // Default
-    }
     const queryUrl = this.constructQueryUrl();
 
     this.http.get<any>(queryUrl).subscribe({
@@ -45,11 +42,6 @@ export class ContentQueryPageComponent {
         } else {
           this.results = undefined;
           console.log(this.results)
-        }
-
-
-        if (this.results == undefined) {
-          this.toggleTypeSelection(this.type_of_record);
         }
       },
       error: (error) => {
