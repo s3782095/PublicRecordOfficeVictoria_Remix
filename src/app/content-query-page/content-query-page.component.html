@@ -27,11 +27,11 @@
 
   <div *ngIf="current_result" class="container">
     <div class="row">
-      <div class="col-12 text-center">
+      <div class="ol-12 text-center">
 
         <div class="image-container">
           <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']"
-                alt="Result Thumbnail" class="centered-image">
+               alt="Result Thumbnail" class="centered-image">
           <div class="image-overlay" (click)="downloadPDFFromManifest(current_result)"></div>
         </div>
 
@@ -69,7 +69,8 @@
   <div class="footer">
     <div class="iteration-btn-group">
       <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">prev</button>
-      <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next</button>
+      <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next
+      </button>
     </div>
 
     <div *ngIf="current_result" class="btn bottom-right iteration-btn-group">
