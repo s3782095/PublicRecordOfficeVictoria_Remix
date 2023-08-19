@@ -40,8 +40,30 @@ h1, h2, h3, h4 {
   color: blue;
 }
 
-img:hover {
-  background-color: rgba(0, 0, 0, 0.5);g
+.image-container {
+  position: relative;
+  display: inline-block; /* or block if you want it to occupy the full width */
+  overflow: hidden; /* Hide the overflow to prevent overlay from expanding */
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 255, 0.3); /* Blue color with slight transparency */
+  opacity: 0; /* Initially transparent */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+.image-container:hover .image-overlay {
+  opacity: 1; /* Show the overlay on hover */
 }
 
 .parameter-values {

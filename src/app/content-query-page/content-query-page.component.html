@@ -28,9 +28,15 @@
   <div *ngIf="current_result" class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']"
-             (click)="downloadPDFFromManifest(current_result)" alt="Result Thumbnail" class="centered-image">
+
+        <div class="image-container">
+          <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']"
+               (click)="downloadPDFFromManifest(current_result)" alt="Result Thumbnail" class="centered-image">
+          <div class="image-overlay"></div>
+        </div>
+
       </div>
+
       <div class="col-12 text-center parameter-values">
         <h3 *ngIf="current_result['title']">
           {{current_result['title']}}</h3>
