@@ -41,8 +41,10 @@ export class ContentQueryPageComponent {
       next: (data) => {
         if (data['response']['docs'][0] != undefined) {
           this.results = data['response']['docs'][0];
+          console.log(this.results)
         } else {
-          this.results = [];
+          this.results = undefined;
+          console.log(this.results)
         }
 
 
