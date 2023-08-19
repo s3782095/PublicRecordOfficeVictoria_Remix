@@ -30,6 +30,26 @@ h1, h2, h3, h4 {
   font-style: italic;
 }
 
+.parameter-values h3 {
+  font-style: normal;
+  color: gray;
+  transition: color 0.2s ease; /* Smooth transition for color change */
+}
+
+.parameter-values h3:hover {
+  color: blue;
+}
+
+img:hover {
+  background-color: rgba(0, 0, 0, 0.5);g
+}
+
+.parameter-values {
+  margin-top: 2em;
+  max-height: 38vh;
+  overflow: scroll;
+}
+
 .search-container {
 }
 

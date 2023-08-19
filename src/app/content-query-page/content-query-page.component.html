@@ -1,23 +1,24 @@
 <div class="container">
 
-<!--  <div class="btn-group">-->
-<!--    <button-->
-<!--      *ngFor="let record_type of RECORD_TYPES"-->
-<!--      type="button"-->
-<!--      class="btn btn-secondary"-->
-<!--      [class.active]="chosen_record_types.includes(record_type)"-->
-<!--      (click)="toggleTypeSelection(record_type)"-->
-<!--    >-->
-<!--      {{ record_type }}-->
-<!--    </button>-->
-<!--  </div>-->
+  <!--  <div class="btn-group">-->
+  <!--    <button-->
+  <!--      *ngFor="let record_type of RECORD_TYPES"-->
+  <!--      type="button"-->
+  <!--      class="btn btn-secondary"-->
+  <!--      [class.active]="chosen_record_types.includes(record_type)"-->
+  <!--      (click)="toggleTypeSelection(record_type)"-->
+  <!--    >-->
+  <!--      {{ record_type }}-->
+  <!--    </button>-->
+  <!--  </div>-->
 
   <form>
     <div class="form-group">
       <h1 class="">Image</h1>
       <h1 class="">Search</h1>
       <div class="search_container">
-        <input type="text" [(ngModel)]="search_request" class="search-field" placeholder="Enter Query and Press Enter" name="query">
+        <input type="text" [(ngModel)]="search_request" class="search-field" placeholder="Enter Query and Press Enter"
+               name="query">
         <button hidden class="input-group-text" type="submit" (click)="SearchQuery()">Search</button>
       </div>
     </div>
@@ -27,28 +28,44 @@
   <div *ngIf="current_result" class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']" (click)="downloadPDFFromManifest(current_result)" alt="Result Thumbnail" class="centered-image">
+        <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']"
+             (click)="downloadPDFFromManifest(current_result)" alt="Result Thumbnail" class="centered-image">
       </div>
+      <div class="col-12 text-center parameter-values">
+        <h3 *ngIf="current_result['title']">
+          {{current_result['title']}}</h3>
+        <h3 *ngIf="current_result['description.a1_description_2']">
+          {{current_result['description.a1_description_2']}}</h3>
+        <h3 *ngIf="current_result['description.a1_description_3']">
+          {{current_result['description.a1_description_3']}}</h3>
+
+        <div *ngFor="let jurisdiction of current_result['jurisdictional_coverage']">
+          <h3>{{jurisdiction}}</h3>
+        </div>
+
+        <div *ngFor="let medium of current_result['medium']">
+          <h3>{{medium}}</h3>
+        </div>
+
+        <h3 *ngIf="current_result['citation']">{{current_result['citation']}}</h3>
+        <h3 *ngIf="current_result['is_part_of_series.title']">{{current_result['is_part_of_series.title']}}</h3>
+        <h3 *ngIf="current_result['record_form']">{{current_result['record_form']}}</h3>
+        <h3 *ngIf="current_result['_id']">{{current_result['_id']}}</h3>
+      </div>
+      <div class="col-12 text-center">
+        <a href="https://prov.vic.gov.au/archive/{{current_result['_id']}}/about">Source</a>
+      </div>
+
     </div>
   </div>
 
   <div class="iteration-btn-group">
     <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">prev</button>
-    <button  [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next</button>
+    <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next</button>
   </div>
 
-    <div *ngIf="results">
-
-    </div>
-
-<!--      <img *ngIf="results['iiif-manifest']" [src]="getImageURLFromManifest(results)" alt="Image">-->
-
-<!--    </div>-->
-
-    <div *ngIf="results == undefined">
-      <h3 class="text-center text-secondary">No Results for {{type_of_record}}</h3>
-    </div>
-
-
+  <div *ngIf="results == undefined">
+    <h3 class="text-center text-secondary">No Results for {{type_of_record}}</h3>
+  </div>
 
 </div>
