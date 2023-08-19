@@ -66,10 +66,9 @@ export class ContentQueryPageComponent {
     } else {
       this.http.get<any>(url_to_manifest).subscribe({
           next: (manifest) => {
-            this.imageCache[url_to_manifest] = manifest['thumbnail'];
-            console.log(manifest['thumbnail']);
-            let file = manifest['thumbnail'];
-            return file;
+            this.imageCache[url_to_manifest] = manifest['iiif-manifest'];
+            console.log(manifest['iiif-manifest']);
+            return manifest['iiif-manifest'];
           },
           error: (error) => {
             this.imageCache[url_to_manifest] = '';
@@ -82,5 +81,17 @@ export class ContentQueryPageComponent {
     }
 
     return '';
+  }
+
+  downloadPDFFromManifest(pdfURLDownloadLink: any) {
+    console.log(pdfURLDownloadLink);
+    const anchor = document.createElement('a');
+    const manifest: any = this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
+    anchor.href = manifest['sequences'][0]['rendering']['@id'];
+    anchor.download = pdfURLDownloadLink['_id'] + ".pdf"; // filename
+    console.log(anchor);
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
   }
 }
