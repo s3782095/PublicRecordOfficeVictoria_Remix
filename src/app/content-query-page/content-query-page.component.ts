@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 import {delay} from "rxjs";
 
@@ -88,16 +88,10 @@ export class ContentQueryPageComponent {
 
   downloadPDFFromManifest(pdfURLDownloadLink: any) {
 
-    const anchor = document.createElement('a');
-    const manifest = this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
+    const imageURL = this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']);
 
-    console.log(this.getImageURLFromManifest(pdfURLDownloadLink['iiif-manifest']));
-    anchor.href = manifest;
+    console.log(imageURL);
 
-    anchor.download = pdfURLDownloadLink['_id'] + ".pdf"; // filename
-    console.log(anchor);
-    document.body.appendChild(anchor);
-    anchor.click();
-    document.body.removeChild(anchor);
+    window.open(imageURL);
   }
 }
