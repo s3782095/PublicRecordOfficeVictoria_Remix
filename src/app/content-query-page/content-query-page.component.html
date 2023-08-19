@@ -38,25 +38,24 @@
       </div>
 
       <div class="col-12 text-center parameter-values">
-        <h3 *ngIf="current_result['title']">
-          {{current_result['title']}}</h3>
-        <h3 *ngIf="current_result['description.a1_description_2']">
+        <h3 *ngIf="current_result['title']" [cdkCopyToClipboard]="current_result['title']">{{current_result['title']}}</h3>
+        <h3 *ngIf="current_result['description.a1_description_2']" [cdkCopyToClipboard]="current_result['description.a1_description_2']">
           {{current_result['description.a1_description_2']}}</h3>
-        <h3 *ngIf="current_result['description.a1_description_3']">
+        <h3 *ngIf="current_result['description.a1_description_3']" [cdkCopyToClipboard]="current_result['description.a1_description_3']">
           {{current_result['description.a1_description_3']}}</h3>
 
         <div *ngFor="let jurisdiction of current_result['jurisdictional_coverage']">
-          <h3>{{jurisdiction}}</h3>
+          <h3 [cdkCopyToClipboard]="jurisdiction">{{jurisdiction}}</h3>
         </div>
 
-        <div *ngFor="let medium of current_result['medium']">
-          <h3>{{medium}}</h3>
+        <div *ngFor="let medium of current_result['medium']" >
+          <h3 [cdkCopyToClipboard]="medium">{{medium}}</h3>
         </div>
 
-        <h3 *ngIf="current_result['citation']">{{current_result['citation']}}</h3>
-        <h3 *ngIf="current_result['is_part_of_series.title']">{{current_result['is_part_of_series.title']}}</h3>
-        <h3 *ngIf="current_result['record_form']">{{current_result['record_form']}}</h3>
-        <h3 *ngIf="current_result['_id']">{{current_result['_id']}}</h3>
+        <h3 *ngIf="current_result['citation']" [cdkCopyToClipboard]="current_result['citation']">{{current_result['citation']}}</h3>
+        <h3 *ngIf="current_result['is_part_of_series.title']" [cdkCopyToClipboard]="current_result['is_part_of_series.title']">{{current_result['is_part_of_series.title']}}</h3>
+        <h3 *ngIf="current_result['record_form']" [cdkCopyToClipboard]="current_result['record_form']">{{current_result['record_form']}}</h3>
+        <h3 *ngIf="current_result['_id']" [cdkCopyToClipboard]="current_result['_id']">{{current_result['_id']}}</h3>
       </div>
 
     </div>
