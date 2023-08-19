@@ -72,11 +72,14 @@
 
   <div class="footer">
     <div class="iteration-btn-group">
-      <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">prev</button>
-      <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next
+      <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">Prev</button>
+      <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">Next
       </button>
     </div>
 
+    <div class="btn">
+      <p class="image-only-warning search-field">* Filters records with images. *</p>
+    </div>
     <div *ngIf="current_result" class="btn bottom-right iteration-btn-group">
       <a href="https://prov.vic.gov.au/archive/{{current_result['_id']}}/about" target="_blank">Source of Record</a>
     </div>

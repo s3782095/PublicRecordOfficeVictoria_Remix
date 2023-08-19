@@ -31,9 +31,10 @@ export class ContentQueryPageComponent {
   }
 
   clearResults() {
+    console.log("cleared results");
     this.results = [];
     this.results_max_index = 0;
-    this.current_index = -1;
+    this.current_index = 0;
     this.current_result = undefined;
   }
 
