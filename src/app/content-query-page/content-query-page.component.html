@@ -14,7 +14,8 @@
 
   <form>
     <div class="form-group">
-      <h1 class="">Image Search</h1>
+      <h1 class="">Image</h1>
+      <h1 class="">Search</h1>
       <div class="search_container">
         <input type="text" [(ngModel)]="search_request" class="search-field" placeholder="Enter Query and Press Enter" name="query">
         <button hidden class="input-group-text" type="submit" (click)="SearchQuery()">Search</button>
@@ -31,8 +32,10 @@
     </div>
   </div>
 
-  <button *ngIf="current_index > 0 && results_max_index > 1" class="btn btn-secondary" (click)="ChangeResult('prev')">prev</button>
-  <button  *ngIf="current_index < results_max_index && results_max_index > 1" class="btn btn-secondary" (click)="ChangeResult('next')">next</button>
+  <div class="iteration-btn-group">
+    <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">prev</button>
+    <button  [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next</button>
+  </div>
 
     <div *ngIf="results">
 
