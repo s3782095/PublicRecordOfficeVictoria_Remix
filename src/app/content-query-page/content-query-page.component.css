@@ -4,21 +4,13 @@ body {
 }
 
 form{
-  /*max-width: 25em;*/
   margin: 1em auto;
-
 }
 
 .btn-group {
   margin: 1em auto;
   display: flex;
   justify-content: center;
-}
-
-.iteration-btn-group {
-  bottom: 0;
-  position: absolute;
-  margin-bottom: 1em;
 }
 
 h1, h2, h3, h4 {
@@ -64,6 +56,15 @@ h1, h2, h3, h4 {
 
 .image-container:hover .image-overlay {
   opacity: 1; /* Show the overlay on hover */
+}
+
+.footer {
+  display: flex;
+  bottom: 0;
+  position: absolute;
+  margin-bottom: 1em;
+  width: 87%;
+  justify-content: space-between;
 }
 
 .parameter-values {

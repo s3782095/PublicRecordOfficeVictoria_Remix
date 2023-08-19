@@ -11,6 +11,7 @@ import {delay} from "rxjs";
 export class ContentQueryPageComponent {
   search_request: string = '';
   type_of_record: string = '';
+  search_executed: boolean = false;
 
   results: any = [];
   results_max_index: number = 0;
@@ -45,6 +46,7 @@ export class ContentQueryPageComponent {
   }
 
   SearchQuery(): Promise<any> {
+    this.search_executed = true;
     this.clearResults();
 
     let queryUrl = this.constructQueryUrl();

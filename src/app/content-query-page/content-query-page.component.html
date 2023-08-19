@@ -58,20 +58,26 @@
         <h3 *ngIf="current_result['record_form']">{{current_result['record_form']}}</h3>
         <h3 *ngIf="current_result['_id']">{{current_result['_id']}}</h3>
       </div>
-      <div class="col-12 text-center">
-        <a href="https://prov.vic.gov.au/archive/{{current_result['_id']}}/about">Source</a>
-      </div>
 
     </div>
   </div>
 
-  <div class="iteration-btn-group">
-    <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">prev</button>
-    <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next</button>
+  <div *ngIf="!results && search_executed">
+    <h3 class="text-center text-secondary">No Results for {{type_of_record}}</h3>
   </div>
 
-  <div *ngIf="results == undefined">
-    <h3 class="text-center text-secondary">No Results for {{type_of_record}}</h3>
+  <div class="footer">
+    <div class="iteration-btn-group">
+      <button [disabled]="current_index == 0" class="btn" (click)="ChangeResult('prev')">prev</button>
+      <button [disabled]="current_index >= results_max_index - 1" class="btn" (click)="ChangeResult('next')">next</button>
+    </div>
+
+    <div *ngIf="current_result" class="btn bottom-right iteration-btn-group">
+      <a href="https://prov.vic.gov.au/archive/{{current_result['_id']}}/about">Record Source</a>
+    </div>
+    <div *ngIf="!current_result" class="btn bottom-right iteration-btn-group">
+      <a href="https://prov.vic.gov.au/">prov.vic.gov.au</a>
+    </div>
   </div>
 
 </div>
