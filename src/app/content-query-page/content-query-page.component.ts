@@ -11,7 +11,10 @@ import {delay} from "rxjs";
 export class ContentQueryPageComponent {
   search_request: string = '';
   type_of_record: string = '';
+
   results: any = [];
+  current_result: any;
+
   API_BASE_URL: string = 'https://api.prov.vic.gov.au/search/';
   imageCache: { [key: string]: string } = {};
 
@@ -39,7 +42,9 @@ export class ContentQueryPageComponent {
       this.http.get(queryUrl).subscribe(
         (data: any) => {
           if (data['response']['docs'][0] != undefined) {
-            this.results = data['response']['docs'][0];
+            this.results = data['response']['docs'];
+            this.current_result = this.results[0];
+            console.log(this.results);
           } else {
               this.results = undefined;
           }
@@ -62,7 +67,6 @@ export class ContentQueryPageComponent {
       this.http.get(url_to_manifest).subscribe(
         (manifest: any) => {
           let imageURL: any = manifest['sequences'][0]['rendering']['@id']
-          console.log(imageURL);
           resolve(imageURL);
         },
         (error) => {
@@ -80,5 +84,27 @@ export class ContentQueryPageComponent {
     } catch (error) {
       console.error('An error occurred:', error);
     }
+  }
+
+  ChangeResult(change: string) {
+    const indexOfCurrent = this.results.indexOf(this.current_result);
+    const maxIndex = this.results.length - 1;
+
+    console.log(indexOfCurrent);
+    console.log(maxIndex);
+
+    let newIndex: number = -1;
+
+    if (change == 'next') {
+      newIndex = (indexOfCurrent + 1) % (maxIndex + 1);
+    } else if (change == 'prev') {
+      newIndex = (indexOfCurrent - 1 + maxIndex + 1) % (maxIndex + 1);
+    }
+
+    console.log(newIndex);
+    console.log(this.results[newIndex]);
+
+    this.current_result = this.results[newIndex];
+
   }
 }

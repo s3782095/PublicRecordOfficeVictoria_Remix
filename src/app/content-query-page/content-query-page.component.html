@@ -23,13 +23,16 @@
   </form>
 
 
-  <div *ngIf="results" class="container">
+  <div *ngIf="current_result" class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <img *ngIf="results['iiif-thumbnail']" [src]="results['iiif-thumbnail']" (click)="downloadPDFFromManifest(results)" alt="Result Thumbnail" class="centered-image">
+        <img *ngIf="current_result['iiif-thumbnail']" [src]="current_result['iiif-thumbnail']" (click)="downloadPDFFromManifest(current_result)" alt="Result Thumbnail" class="centered-image">
       </div>
     </div>
   </div>
+
+  <button class="btn btn-secondary" (click)="ChangeResult('prev')">prev</button>
+  <button class="btn btn-secondary" (click)="ChangeResult('next')">next</button>
 
     <div *ngIf="results">
 
