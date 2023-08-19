@@ -14,9 +14,3 @@ form{
   display: flex;
   justify-content: center;
 }
-
-.centered-image {
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
-}

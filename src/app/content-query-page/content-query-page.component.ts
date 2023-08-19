@@ -15,7 +15,9 @@ export class ContentQueryPageComponent {
   API_BASE_URL: string = 'https://api.prov.vic.gov.au/search/';
   imageCache: { [key: string]: string } = {};
 
-  RECORD_TYPES: string[] = ["File", "Document", "Map, Plan, or Drawing", "Photograph or Image", "Volume", "Card",];
+  // File - Requires download from prov website
+  UNUSED_RECORD_TYPES: string[] = ["File"];
+  RECORD_TYPES: string[] = ["Document", "Map, Plan, or Drawing", "Photograph or Image", "Volume", "Card"];
   chosen_record_types: string[] = ["Photograph or Image"];
 
   constructor(private http: HttpClient) {
@@ -51,11 +53,8 @@ export class ContentQueryPageComponent {
   }
 
   toggleTypeSelection(record_type: string) {
-    if (this.chosen_record_types.includes(record_type)) {
-      this.chosen_record_types = this.chosen_record_types.filter(f => f !== record_type);
-    } else {
-      this.chosen_record_types.push(record_type);
-    }
+    this.chosen_record_types = [];
+    this.chosen_record_types.push(record_type);
   }
 
   getImageURLFromManifest(url_to_manifest: string): Promise<any> {
