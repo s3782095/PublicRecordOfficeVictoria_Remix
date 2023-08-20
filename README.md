@@ -3,11 +3,8 @@
 
 ***Members:** Mitchell Gust*
 
-## Application Help
-
-***How to Run Application:** `ng serve`*
-
-***View Running Application:** Navigate to `http://localhost:4200/`*
+## App Screenshot
+![](https://github.com/s3782095/PublicRecordOfficeVictoria_Remix/blob/76599192016f29ac7d71c5772acf24ccabd69126/wiki-media/screenshot-of-application.png)
 
 ## Included in MVP:
 
@@ -37,3 +34,10 @@
 - Get Colour Palette of Record Image Opened. Display Colours on Screen. Click to copy Hex Code of Colour
 - Convert PDFs to Images to allow direct drop and drop from website
 - Only Show Records that don't require manual download from prov.vic.gov.au
+
+
+## Application Help
+
+***How to Run Application:** `ng serve`*
+
+***View Running Application:** Navigate to `http://localhost:4200/`*
