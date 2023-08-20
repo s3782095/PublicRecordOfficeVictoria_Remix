@@ -17,7 +17,9 @@
       <div class="search_container">
         <input type="text" [(ngModel)]="search_request" class="search-field" placeholder="Enter Query and Press Enter"
                name="query">
-        <button hidden class="input-group-text" type="submit" (click)="SearchQuery()">Search</button>
+        <button class="search-button" type="submit" (click)="SearchQuery()">
+            <i class="fa fa-arrow-right"></i>
+        </button>
       </div>
     </div>
   </form>
