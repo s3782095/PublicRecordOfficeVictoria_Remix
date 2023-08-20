@@ -1,8 +1,13 @@
-# PublicRecordOfficeVictoriaRemix
+# Public Record Office Victoria Remix
+***Team:** Porcupine Fish*
 
-## Run Application
+***Members:** Mitchell Gust*
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Application Help
+
+***How to Run Application:** `ng serve`*
+
+***View Running Application:** Navigate to `http://localhost:4200/`*
 
 ## Included in MVP:
 
