@@ -1,27 +1,34 @@
 # PublicRecordOfficeVictoriaRemix
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
-
-## Development server
+## Run Application
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Included in MVP:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**Search**
+- Search Records Including Media Only
+- Search Records Based on Record Type Selection
+- Search Records using Search Button or 'Enter' Key
+- Store up to 10 Records Each Search
+- Use Next/Previous Button to iterate through the 10 Records
+- Disable Buttons Based on Current Record and Number of Records Returned in Search
 
-## Build
+**Record Image**
+- View Record Image Thumbnail
+- Click to Download Full PDF Render of Record Image
+- Hover on Record Image Thumbnail to Highlight
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Record Details**
+- View Select Record Parameter Values (e.g. title, description, jurisdictional_coverage, medium, citation, is_part_of_series.title, record_form, _id)
+- Click on Record Parameter to Copy to User Clipboard
+- Hover on Record Parameter to Highlight
 
-## Running unit tests
+**Record Link**
+- View Link to Website of Record (To view all record details)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## For Next Release:
+- Crop Segments of Images at Random and Allow Drag and Drop
+- Get Colour Palette of Record Image Opened. Display Colours on Screen. Click to copy Hex Code of Colour
+- Convert PDFs to Images to allow direct drop and drop from website
+- Only Show Records that don't require manual download from prov.vic.gov.au
